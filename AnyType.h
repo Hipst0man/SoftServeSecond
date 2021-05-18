@@ -15,8 +15,7 @@ union DataUnion
     char char_var;
     int int_var;
     float float_var;
-    double double_var;
-    
+    double double_var;   
 };
 
 class AnyType
