@@ -145,6 +145,5 @@ std::string AnyType::dataType()
     else if (type_hash == typeid(char).hash_code()) return "Char";
     else if (type_hash == typeid(int).hash_code()) return "Int";
     else if (type_hash == typeid(float).hash_code()) return "Float";
-    else if (type_hash == typeid(double).hash_code()) return "Double";
-    else return "Unknown type";
+    else return "Double";
 }
