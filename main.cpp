@@ -8,7 +8,7 @@ int main()
     anyType = true;
     anyType = 1.7;
     
-    AnyType anyType1 = 1.9;
+    AnyType anyType1(std::move(AnyType(2.0)));
     anyType1.swap(anyType);
 
     try

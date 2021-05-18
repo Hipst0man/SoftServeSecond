@@ -63,7 +63,6 @@ AnyType& AnyType::operator= (AnyType&& copy)
     data = copy.data;
     copy.data.double_var = 0;
     copy.type_hash = 0;
-    
     return *this;
 }
 
@@ -102,31 +101,31 @@ AnyType& AnyType::operator= (const double val)
     return *this;
 }
 
-bool AnyType::toBool()
+bool AnyType::toBool() const
 {
     if (type_hash == typeid(bool).hash_code()) return data.bool_var;
     else throw mException("Unable to cast to bool");
 }
 
-char AnyType::toChar()
+char AnyType::toChar() const
 {
     if (type_hash == typeid(char).hash_code()) return data.char_var;
     else throw mException("Unable to cast to char");    
 }
 
-int AnyType::toInt()
+int AnyType::toInt() const
 {
     if (type_hash == typeid(int).hash_code()) return data.int_var;
     else throw mException("Unable to cast to int");
 }
 
-float AnyType::toFloat()
+float AnyType::toFloat() const
 {
     if (type_hash == typeid(float).hash_code()) return data.float_var;
     else throw mException("Unable to cast to float");
 }
 
-double AnyType::toDouble()
+double AnyType::toDouble() const
 {
     if (type_hash == typeid(double).hash_code()) return data.double_var;
     else throw mException("Unable to cast to double");

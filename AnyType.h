@@ -44,11 +44,11 @@ public:
     AnyType& operator= (const float val);
     AnyType& operator= (const double val);
 
-    bool toBool();
-    char toChar();
-    int toInt();
-    float toFloat();
-    double toDouble();
+    bool toBool() const;
+    char toChar() const;
+    int toInt() const;
+    float toFloat() const;
+    double toDouble() const;
 
     void swap(AnyType& right);
     std::string dataType();
