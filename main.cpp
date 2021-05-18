@@ -8,7 +8,8 @@ int main()
     anyType = true;
     anyType = 1.7;
     
-    AnyType anyType1(std::move(anyType));
+    AnyType anyType1 = 1.9;
+    anyType1.swap(anyType);
 
     try
     {
@@ -17,11 +18,11 @@ int main()
 
     catch(mException& ex)
     {
-        std::cout << ex.getExceptionInfo() << '\n';
+        std::cout << ex.what() << '\n';
     }
 
     double storedValue = anyType1.toDouble();
-    std::cout << storedValue << std::endl;
+    std::cout << storedValue << " " << anyType1.dataType() << std::endl;
     
     return 0;
 }

@@ -9,7 +9,7 @@ AnyType::AnyType(bool val)
 
 AnyType::AnyType(char val)
 {
-    data.char_var= val;
+    data.char_var = val;
     type_hash = typeid(char).hash_code();
 }
 
@@ -41,12 +41,14 @@ AnyType::AnyType(AnyType&& copy)
 {
     data = copy.data;
     type_hash = copy.type_hash;
-    copy.data.bool_var = 0;
-    copy.data.char_var = 0;
-    copy.data.int_var = 0;
-    copy.data.float_var = 0;
     copy.data.double_var = 0;
     copy.type_hash = 0;
+}
+
+AnyType::~AnyType()
+{
+    data.double_var = 0;
+    type_hash = 0;
 }
 
 AnyType& AnyType::operator= (const AnyType& copy)
@@ -59,11 +61,6 @@ AnyType& AnyType::operator= (const AnyType& copy)
 AnyType& AnyType::operator= (AnyType&& copy)
 {
     data = copy.data;
-    type_hash = copy.type_hash;
-    copy.data.bool_var = 0;
-    copy.data.char_var = 0;
-    copy.data.int_var = 0;
-    copy.data.float_var = 0;
     copy.data.double_var = 0;
     copy.type_hash = 0;
     
@@ -79,7 +76,7 @@ AnyType& AnyType::operator= (const bool val)
 
 AnyType& AnyType::operator= (const char val)
 {
-    data.char_var= val;
+    data.char_var = val;
     type_hash = typeid(char).hash_code();
     return *this;
 }
@@ -133,4 +130,21 @@ double AnyType::toDouble()
 {
     if (type_hash == typeid(double).hash_code()) return data.double_var;
     else throw mException("Unable to cast to double");
+}
+
+void AnyType::swap(AnyType& right)
+{
+    const AnyType tmp(*this);
+    *this = right;
+    right = tmp;
+}
+
+std::string AnyType::dataType()
+{
+    if (type_hash == typeid(bool).hash_code()) return "Bool";
+    else if (type_hash == typeid(char).hash_code()) return "Char";
+    else if (type_hash == typeid(int).hash_code()) return "Int";
+    else if (type_hash == typeid(float).hash_code()) return "Float";
+    else if (type_hash == typeid(double).hash_code()) return "Double";
+    else return "Unknown type";
 }

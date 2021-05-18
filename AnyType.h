@@ -1,14 +1,13 @@
 #include <iostream>
 
-class mException
+class mException : public std::exception
 {
 private:
     std::string info;
 public:
     mException(std::string _info) : info(_info) {}
-    std::string getExceptionInfo() {return info;}
+    std::string what() {return info;}
 };
-
 
 union DataUnion
 {
@@ -22,7 +21,7 @@ union DataUnion
 
 class AnyType
 {
-    DataUnion data; //can be changet to ptr
+    DataUnion data;
     size_t type_hash;
     
 public:
@@ -35,8 +34,8 @@ public:
     AnyType(double val);
     AnyType(const AnyType& copy);
     AnyType(AnyType&& copy);
-
-    //~AnyType();
+    
+    ~AnyType();
 
     AnyType& operator= (const AnyType& copy);
     AnyType& operator= (AnyType&& copy);
@@ -51,5 +50,8 @@ public:
     int toInt();
     float toFloat();
     double toDouble();
+
+    void swap(AnyType& right);
+    std::string dataType();
     
 };
