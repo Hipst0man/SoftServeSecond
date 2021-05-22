@@ -9,23 +9,23 @@ public:
     std::string what() {return info;}
 };
 
-union DataUnion
-{
-    bool bool_var;
-    char char_var;
-    int int_var;
-    float float_var;
-    double double_var;   
-};
 
 class AnyType
 {
-    DataUnion data;
+    union DataUnion
+    {
+        bool bool_var;
+        char char_var;
+        int int_var;
+        float float_var;
+        double double_var;   
+    } data;
+
     size_t type_hash;
     
 public:
 
-    AnyType() = delete;
+    AnyType();
     AnyType(bool val);
     AnyType(char val);
     AnyType(int val);

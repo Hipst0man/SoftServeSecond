@@ -1,6 +1,12 @@
 #include "AnyType.h"
 
 
+AnyType::AnyType()
+{
+    data.double_var = 0;
+    type_hash = 0;
+}
+
 AnyType::AnyType(bool val)
 {
     data.bool_var = val;
@@ -61,6 +67,7 @@ AnyType& AnyType::operator= (const AnyType& copy)
 AnyType& AnyType::operator= (AnyType&& copy)
 {
     data = copy.data;
+    type_hash = copy.type_hash;
     copy.data.double_var = 0;
     copy.type_hash = 0;
     return *this;
@@ -140,6 +147,7 @@ void AnyType::swap(AnyType& right)
 
 std::string AnyType::dataType()
 {
+    if (type_hash == 0) return "There is no stored value";
     if (type_hash == typeid(bool).hash_code()) return "Bool";
     else if (type_hash == typeid(char).hash_code()) return "Char";
     else if (type_hash == typeid(int).hash_code()) return "Int";
