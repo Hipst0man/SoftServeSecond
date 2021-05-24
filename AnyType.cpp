@@ -45,8 +45,8 @@ AnyType::AnyType(const AnyType& copy)
 
 AnyType::AnyType(AnyType&& copy)
 {
-    data = copy.data;
-    type_hash = copy.type_hash;
+    data = std::move(copy.data);
+    type_hash = std::move(copy.type_hash);
     copy.data.double_var = 0;
     copy.type_hash = 0;
 }
@@ -66,8 +66,8 @@ AnyType& AnyType::operator= (const AnyType& copy)
 
 AnyType& AnyType::operator= (AnyType&& copy)
 {
-    data = copy.data;
-    type_hash = copy.type_hash;
+    data = std::move(copy.data);
+    type_hash = std::move(copy.type_hash);
     copy.data.double_var = 0;
     copy.type_hash = 0;
     return *this;
